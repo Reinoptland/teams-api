@@ -8,4 +8,6 @@ const Team = db.define("team", {
   },
 });
 
+
+
 module.exports = Team;

@@ -7,6 +7,7 @@ const bodyParserMiddleWare = bodyParser.json()
 const port = process.env.PORT || 4000;
 
 const teamRouter = require('./team/router');
+const playerRouter = require('./player/router')
 
 // If req.body is undefined
 // - use bodyparser
@@ -15,7 +16,20 @@ const teamRouter = require('./team/router');
 
 app
   .use(bodyParserMiddleWare)
+  .use(playerRouter)
   .use(teamRouter)
   .listen(port, () => {
     console.log(`App is listening on port ${port}`);
   });
+
+
+/* 
+
+TODO
+
+- player Model
+- router -> Player router
+- Define the relationships
+- router -> add routes to team router so you can get the players of a team?
+
+*/
