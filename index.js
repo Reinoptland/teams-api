@@ -1,17 +1,24 @@
 const express = require('express');
+
+// middlewares
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const bodyParserMiddleWare = bodyParser.json()
+const corsMiddleWare = cors()
+const authMiddleWare = require('./auth/middleware')
+
+// Routers
 const teamRouter = require('./team/router');
 const playerRouter = require('./player/router')
+const authRouter = require('./auth/router')
+
+// Models & DB
 const Team = require('./team/model')
 const Player = require('./player/model')
 const db = require('./db')
 
-
+// Init
 const app = express();
-const bodyParserMiddleWare = bodyParser.json()
-const corsMiddleWare = cors()
-
 const port = process.env.PORT || 4000;
 
 
@@ -21,9 +28,18 @@ const port = process.env.PORT || 4000;
 // - make sure to app.use(bodyparser) before doing app.use(blablRouter)
 // - order matters here (wtf?) -> probably for a good reason 
 
+const loggingMiddleWare = (req, res, next) => {
+  console.log('I am a middleware', Date.now())
+  next() // everything is ok -> next()
+}
+
 app
+  // use auth middleware for entire routers (maybe a bit heavy handed)
+  // .use(authMiddleWare)
+  .use(loggingMiddleWare)
   .use(corsMiddleWare)
   .use(bodyParserMiddleWare)
+  .use(authRouter)
   .use(playerRouter)
   .use(teamRouter)
   .listen(port, () => {
