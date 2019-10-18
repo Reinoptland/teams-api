@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const Team = require('./model');
 const Player = require('../player/model')
+const authMiddleWare = require('../auth/middleware')
 
 const router = new Router();
 
@@ -22,7 +23,7 @@ router.get('/teams/:teamId', (req, res, next) => {
 });
 
 // Create a new team account
-router.post("/teams", (req, res, next) => {
+router.post("/teams", authMiddleWare, (req, res, next) => {
   // console.log("WHAT IS REQ.BODY", req.body)
   Team.create(req.body)
     .then(team => res.json(team))
