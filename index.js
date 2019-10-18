@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express();
 const bodyParserMiddleWare = bodyParser.json()
-// eslint-disable-next-line no-undef
+const corsMiddleWare = cors()
+
 const port = process.env.PORT || 4000;
 
 const teamRouter = require('./team/router');
@@ -15,6 +17,7 @@ const playerRouter = require('./player/router')
 // - order matters here (wtf?) -> probably for a good reason 
 
 app
+  .use(corsMiddleWare)
   .use(bodyParserMiddleWare)
   .use(playerRouter)
   .use(teamRouter)

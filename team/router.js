@@ -12,6 +12,7 @@ router.get('/teams', (req, res, next) => {
     .catch(next);
 });
 
+
 router.get('/teams/:teamId', (req, res, next) => {
   Team.findByPk(req.params.teamId, { include: [ Player ]})
     .then(team => {
