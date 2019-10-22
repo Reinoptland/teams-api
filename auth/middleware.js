@@ -6,10 +6,10 @@ const { toData } = require("./jwt");
 // Authenticate user by checking the information in the token
 // X Make User Model
 // - Make a way for a user to sign up
-//    - Backend
+//    X Backend
 //    - Fronted
 // - Make a way for a user to login (this is when we give them a token)
-//    - Backend
+//    X Backend
 //    - Frontend
 // - Make the user send us their token in requests that require authorization
 //    - Frontend
