@@ -11,6 +11,7 @@ const authMiddleWare = require("./auth/middleware");
 const teamRouter = require("./team/router");
 const playerRouter = require("./player/router");
 const authRouter = require("./auth/router");
+const userRouter = require("./user/router");
 
 // Models & DB
 const Team = require("./team/model");
@@ -38,6 +39,7 @@ app
   .use(loggingMiddleWare)
   .use(corsMiddleWare)
   .use(bodyParserMiddleWare)
+  .use(userRouter)
   .use(authRouter)
   .use(playerRouter)
   .use(teamRouter)
