@@ -200,3 +200,13 @@ export default (state = [], action = {}) => {
   }
 };
 ```
+
+**Database is updated after the request, but we need to refresh to see it**
+
+- Cause: frontend state (redux) & backend state (db) are out of sync
+- Common cause: redux is not updated after request
+
+You might need to:
+
+- dispatch an action
+- handle the action in the reducer(s)
